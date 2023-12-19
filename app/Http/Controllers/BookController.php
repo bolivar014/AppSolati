@@ -30,14 +30,14 @@ class BookController extends Controller
 
         Book::create($request->all());
 
-        // return redirect()->route('books.index')->with('success', 'Libro creado correctamente.');
-        return response()->json($request, 201); // 201 Created
+        return redirect()->route('books.index')->with('success', 'Libro creado correctamente.');
+        // return response()->json($request, 201); // 201 Created
     }
 
     public function show(Book $book)
     {
-        // return view('books.show', compact('book'));
-        return response()->json($book);
+        return view('books.show', compact('book'));
+        // return response()->json($book);
     }
 
     public function edit(Book $book)
@@ -54,8 +54,8 @@ class BookController extends Controller
 
         $book->update($request->all());
 
-        // return redirect()->route('books.index')->with('success', 'Libro actualizado correctamente.');
-        return response()->json($book);
+        return redirect()->route('books.index')->with('success', 'Libro actualizado correctamente.');
+        // return response()->json($book);
     }
 
     public function destroy(Book $book)
