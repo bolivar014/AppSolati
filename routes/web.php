@@ -14,13 +14,23 @@ use App\Http\Controllers\BookController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// Route::resource('books', BookController::class);
+
+Route::get('/login', function () {
+    return view('login');
 });
 
-Auth::routes();
+Route::get('/books', function () {
+    return view('books');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::resource('books', BookController::class);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
