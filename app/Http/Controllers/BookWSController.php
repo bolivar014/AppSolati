@@ -6,19 +6,21 @@ use Illuminate\Http\Request;
 
 use App\Models\Book;
 
-class BookController extends Controller
+class BookWSController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    //
+    //    //
     public function index()
     {
         $books = Book::all();
-        return view('books.index', compact('books'));
-        //return response()->json($books);
+        // // return view('books.index', compact('books'));
+        // return response()->json($books);
+        try {
+            // ... lógica para obtener datos ...
+
+            return response()->json(['data' => $books], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function create()
@@ -35,14 +37,14 @@ class BookController extends Controller
 
         Book::create($request->all());
 
-        return redirect()->route('books.index')->with('success', 'Libro creado correctamente.');
-        // return response()->json($request, 201); // 201 Created
+        // return redirect()->route('books.index')->with('success', 'Libro creado correctamente.');
+        return response()->json($request, 201); // 201 Created
     }
 
     public function show(Book $book)
     {
-        return view('books.show', compact('book'));
-        // return response()->json($book);
+        // return view('books.show', compact('book'));
+        return response()->json($book);
     }
 
     public function edit(Book $book)
@@ -59,8 +61,8 @@ class BookController extends Controller
 
         $book->update($request->all());
 
-        return redirect()->route('books.index')->with('success', 'Libro actualizado correctamente.');
-        // return response()->json($book);
+        // return redirect()->route('books.index')->with('success', 'Libro actualizado correctamente.');
+        return response()->json($book);
     }
 
     public function destroy(Book $book)
